@@ -1,0 +1,12 @@
+org/infinispan/inmemory/InmemoryCatalogResource.class
+org/infinispan/inmemory/ConfigureSQLStore.class
+org/infinispan/inmemory/schema/PurchasedProductKey$___Marshaller_a81695a00c30b83a876650949f9cbaf72d2f621e92089117c80e1ae9c6cbdfd4.class
+org/infinispan/inmemory/schema/PurchasedProductValue.class
+org/infinispan/inmemory/schema/RetailProductValue.class
+org/infinispan/inmemory/schema/PurchasedProductKey.class
+META-INF/services/org.infinispan.protostream.SerializationContextInitializer
+org/infinispan/inmemory/config/InmemoryCatalogueConfig.class
+org/infinispan/inmemory/schema/InmemoryCatalogueSchemaImpl.class
+org/infinispan/inmemory/schema/InmemoryCatalogueSchema.class
+org/infinispan/inmemory/schema/RetailProductValue$___Marshaller_3ef0b0d656756154e0c425e84c589f58333b5fdfcf5381c20395445d1f26c40b.class
+org/infinispan/inmemory/schema/PurchasedProductValue$___Marshaller_37ad5afbc1076b90b443030d15e53e48ab88aedf3baefa04e7b8cc1625ffaa90.class

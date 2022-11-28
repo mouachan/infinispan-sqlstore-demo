@@ -1,0 +1,7 @@
+/Users/mouchan/projects/infinispan-sqlstore-demo/retail-catalogue/src/main/java/org/infinispan/retail/model/Customer.java
+/Users/mouchan/projects/infinispan-sqlstore-demo/retail-catalogue/src/main/java/org/infinispan/retail/model/StockAvailable.java
+/Users/mouchan/projects/infinispan-sqlstore-demo/retail-catalogue/src/main/java/org/infinispan/retail/model/CustomerCommand.java
+/Users/mouchan/projects/infinispan-sqlstore-demo/retail-catalogue/src/main/java/org/infinispan/retail/RetailCatalogResource.java
+/Users/mouchan/projects/infinispan-sqlstore-demo/retail-catalogue/src/main/java/org/infinispan/retail/model/RetailProduct.java
+/Users/mouchan/projects/infinispan-sqlstore-demo/retail-catalogue/src/main/java/org/infinispan/retail/CommandsResource.java
+/Users/mouchan/projects/infinispan-sqlstore-demo/retail-catalogue/src/main/java/org/infinispan/retail/CommandLoader.java

@@ -1,0 +1,8 @@
+org/infinispan/retail/CommandsResource.class
+org/infinispan/retail/CommandLoader.class
+META-INF/panache-archive.marker
+org/infinispan/retail/RetailCatalogResource.class
+org/infinispan/retail/model/Customer.class
+org/infinispan/retail/model/CustomerCommand.class
+org/infinispan/retail/model/StockAvailable.class
+org/infinispan/retail/model/RetailProduct.class

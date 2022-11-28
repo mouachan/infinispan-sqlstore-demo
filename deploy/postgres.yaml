@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: rhel8/postgresql-12
+          ports:
+            - containerPort: 5432
+              protocol: TCP
+          env:
+            - name: POSTGRESQL_DATABASE
+              value: retailstore
+            - name: POSTGRESQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: sqlstore-credentials
+                  key: db-username
+            - name: POSTGRESQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: sqlstore-credentials
+                  key: db-password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: postgres
+  name: postgres
+spec:
+  ports:
+    - name: http
+      port: 5432
+      protocol: TCP
+  selector:
+    app: postgres
+  type: NodePort

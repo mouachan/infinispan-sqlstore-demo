@@ -1,0 +1,67 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    app.quarkus.io/commit-id: 8c2eaa62dd92240d47658eb9d818342597b0d240
+    app.quarkus.io/build-timestamp: 2022-11-28 - 12:02:19 +0000
+  labels:
+    app.kubernetes.io/name: inmemory-catalogue-service
+    app.kubernetes.io/version: 1.0.0-SNAPSHOT
+  name: inmemory-catalogue-service
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+  selector:
+    app.kubernetes.io/name: inmemory-catalogue-service
+    app.kubernetes.io/version: 1.0.0-SNAPSHOT
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    app.quarkus.io/commit-id: 8c2eaa62dd92240d47658eb9d818342597b0d240
+    app.quarkus.io/build-timestamp: 2022-11-28 - 12:02:19 +0000
+  labels:
+    app.kubernetes.io/version: 1.0.0-SNAPSHOT
+    app.kubernetes.io/name: inmemory-catalogue-service
+  name: inmemory-catalogue-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/version: 1.0.0-SNAPSHOT
+      app.kubernetes.io/name: inmemory-catalogue-service
+  template:
+    metadata:
+      annotations:
+        app.quarkus.io/commit-id: 8c2eaa62dd92240d47658eb9d818342597b0d240
+        app.quarkus.io/build-timestamp: 2022-11-28 - 12:02:19 +0000
+      labels:
+        app.kubernetes.io/version: 1.0.0-SNAPSHOT
+        app.kubernetes.io/name: inmemory-catalogue-service
+    spec:
+      containers:
+        - command:
+            - java
+            - -Dquarkus.http.host=0.0.0.0
+            - -Djava.util.logging.manager=org.jboss.logmanager.LogManager
+            - -jar
+            - /deployments/quarkus-run.jar
+          env:
+            - name: KUBERNETES_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: JAVA_APP_JAR
+              value: /deployments/quarkus-run.jar
+          image: mouchan/inmemory-catalogue:1.0.0-SNAPSHOT
+          imagePullPolicy: Always
+          name: inmemory-catalogue-service
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP

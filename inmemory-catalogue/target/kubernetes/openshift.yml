@@ -1,0 +1,133 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    app.openshift.io/vcs-url: <<unknown>>
+    app.quarkus.io/commit-id: 8c2eaa62dd92240d47658eb9d818342597b0d240
+    app.quarkus.io/build-timestamp: 2022-11-28 - 12:02:19 +0000
+  labels:
+    app.kubernetes.io/name: inmemory-catalogue
+    app.kubernetes.io/version: 1.0.0-SNAPSHOT
+    app.openshift.io/runtime: quarkus
+  name: inmemory-catalogue
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+  selector:
+    app.kubernetes.io/name: inmemory-catalogue
+    app.kubernetes.io/version: 1.0.0-SNAPSHOT
+  type: ClusterIP
+---
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  annotations:
+    app.openshift.io/vcs-url: <<unknown>>
+    app.quarkus.io/commit-id: 8c2eaa62dd92240d47658eb9d818342597b0d240
+    app.quarkus.io/build-timestamp: 2022-11-28 - 12:02:19 +0000
+  labels:
+    app.kubernetes.io/name: inmemory-catalogue
+    app.kubernetes.io/version: 1.0.0-SNAPSHOT
+    app.openshift.io/runtime: quarkus
+  name: inmemory-catalogue
+spec: {}
+---
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  labels:
+    app.kubernetes.io/name: inmemory-catalogue
+    app.kubernetes.io/version: 1.0.0-SNAPSHOT
+  name: openjdk-11
+spec:
+  dockerImageRepository: registry.access.redhat.com/ubi8/openjdk-11
+---
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  annotations:
+    app.openshift.io/vcs-url: <<unknown>>
+    app.quarkus.io/commit-id: 8c2eaa62dd92240d47658eb9d818342597b0d240
+    app.quarkus.io/build-timestamp: 2022-11-28 - 12:02:19 +0000
+  labels:
+    app.kubernetes.io/name: inmemory-catalogue
+    app.kubernetes.io/version: 1.0.0-SNAPSHOT
+    app.openshift.io/runtime: quarkus
+  name: inmemory-catalogue
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: inmemory-catalogue:1.0.0-SNAPSHOT
+  source:
+    binary: {}
+  strategy:
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        name: openjdk-11:1.11
+---
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    app.openshift.io/vcs-url: <<unknown>>
+    app.quarkus.io/commit-id: 8c2eaa62dd92240d47658eb9d818342597b0d240
+    app.quarkus.io/build-timestamp: 2022-11-28 - 12:02:19 +0000
+  labels:
+    app.kubernetes.io/name: inmemory-catalogue
+    app.kubernetes.io/version: 1.0.0-SNAPSHOT
+    app.openshift.io/runtime: quarkus
+  name: inmemory-catalogue
+spec:
+  replicas: 1
+  selector:
+    app.kubernetes.io/name: inmemory-catalogue
+    app.kubernetes.io/version: 1.0.0-SNAPSHOT
+  template:
+    metadata:
+      annotations:
+        app.openshift.io/vcs-url: <<unknown>>
+        app.quarkus.io/commit-id: 8c2eaa62dd92240d47658eb9d818342597b0d240
+        app.quarkus.io/build-timestamp: 2022-11-28 - 12:02:19 +0000
+      labels:
+        app.openshift.io/runtime: quarkus
+        app.kubernetes.io/name: inmemory-catalogue
+        app.kubernetes.io/version: 1.0.0-SNAPSHOT
+    spec:
+      containers:
+        - command:
+            - java
+            - -Dquarkus.http.host=0.0.0.0
+            - -Djava.util.logging.manager=org.jboss.logmanager.LogManager
+            - -jar
+            - /deployments/quarkus-run.jar
+          env:
+            - name: KUBERNETES_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: JAVA_APP_JAR
+              value: /deployments/quarkus-run.jar
+          envFrom:
+            - secretRef:
+                name: clients-credentials
+          image: mouchan/inmemory-catalogue:1.0.0-SNAPSHOT
+          imagePullPolicy: IfNotPresent
+          name: inmemory-catalogue
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+  triggers:
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - inmemory-catalogue
+        from:
+          kind: ImageStreamTag
+          name: inmemory-catalogue:1.0.0-SNAPSHOT
+      type: ImageChange

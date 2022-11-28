@@ -1,0 +1,7 @@
+/Users/mouchan/projects/infinispan-sqlstore-demo/inmemory-catalogue/src/main/java/org/infinispan/inmemory/schema/PurchasedProductKey.java
+/Users/mouchan/projects/infinispan-sqlstore-demo/inmemory-catalogue/src/main/java/org/infinispan/inmemory/ConfigureSQLStore.java
+/Users/mouchan/projects/infinispan-sqlstore-demo/inmemory-catalogue/src/main/java/org/infinispan/inmemory/schema/PurchasedProductValue.java
+/Users/mouchan/projects/infinispan-sqlstore-demo/inmemory-catalogue/src/main/java/org/infinispan/inmemory/schema/RetailProductValue.java
+/Users/mouchan/projects/infinispan-sqlstore-demo/inmemory-catalogue/src/main/java/org/infinispan/inmemory/schema/InmemoryCatalogueSchema.java
+/Users/mouchan/projects/infinispan-sqlstore-demo/inmemory-catalogue/src/main/java/org/infinispan/inmemory/config/InmemoryCatalogueConfig.java
+/Users/mouchan/projects/infinispan-sqlstore-demo/inmemory-catalogue/src/main/java/org/infinispan/inmemory/InmemoryCatalogResource.java
